@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <math.h>
+
+int binaryToDecimal(int n) {
+    int decimal = 0, base = 1;
+    while (n) {
+        int last_digit = n % 10;
+        n = n / 10;
+        decimal += last_digit * base;
+        base = base * 2;
+    }
+    return decimal;
+}
+
+int decimalToBinary(int n) {
+    int binary = 0, place = 1;
+    while (n) {
+        int remainder = n % 2;
+        binary += remainder * place;
+        n /= 2;
+        place *= 10;
+    }
+    return binary;
+}
+
+int main() {
+    int choice, num;
+    printf("Enter 1 for Binary to Decimal or 2 for Decimal to Binary: ");
+    scanf("%d", &choice);
+
+    printf("Enter the number: ");
+    scanf("%d", &num);
+
+    if (choice == 1)
+        printf("Decimal: %d\n", binaryToDecimal(num));
+    else
+        printf("Binary: %d\n", decimalToBinary(num));
+
+    return 0;
+}

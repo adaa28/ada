@@ -1,0 +1,50 @@
+#include <stdio.h>
+
+void swapTemp(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+//seocnd method
+void swapAddSub(int *a, int *b) {
+    *a = *a + *b;
+    *b = *a - *b;
+    *a = *a - *b;
+}
+
+//third methos 
+void swapMulDiv(int *a, int *b) {
+    *a = *a * *b;
+    *b = *a / *b;
+    *a = *a / *b;
+}
+
+//fourth methos 
+void swapXOR(int *a, int *b) {
+    *a = *a ^ *b;
+    *b = *a ^ *b;
+    *a = *a ^ *b;
+}
+
+int main() {
+    int a, b;
+    printf("Enter two integers: ");
+    scanf("%d %d", &a, &b);
+
+    printf("Using each swap method:\n");
+    swapTemp(&a, &b);
+    printf("Swapped using temporary variable: %d %d\n", a, b);
+
+    swapAddSub(&a, &b);
+    printf("Swapped using addition and subtraction: %d %d\n", a, b);
+
+    swapMulDiv(&a, &b);
+    printf("Swapped using multiplication and division: %d %d\n", a, b);
+
+    swapXOR(&a, &b);
+    printf("Swapped using XOR: %d %d\n", a, b);
+
+    return 0;
+}
+

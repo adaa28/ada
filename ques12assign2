@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+void print_array(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[100] = {10, 20, 30, 40, 50};
+    int n = 5;
+
+    printf("Original Array: ");
+    print_array(arr, n);
+
+    for (int i = 0; i < n - 1; i++)
+        arr[i] = arr[i + 1];
+    n--;
+    printf("After deleting from front: ");
+    print_array(arr, n);
+
+ 
+    int pos = 2;
+    for (int i = pos; i < n - 1; i++)
+        arr[i] = arr[i + 1];
+    n--;
+    printf("After deleting from position %d: ", pos);
+    print_array(arr, n);
+
+    n--;
+    printf("After deleting from end: ");
+    print_array(arr, n);
+
+    return 0;
+}

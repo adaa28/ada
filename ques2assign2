@@ -1,0 +1,9 @@
+marks = [50, 65, 78, 90, 35]
+grades = []
+for mark in marks:
+    if mark >= 75:
+        grades.append('A')
+    elif 60 <= mark < 75:
+        grades.append('B')
+    elif 40 <= mark < 60:
+       

@@ -1,0 +1,104 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+#define SIZE 3
+
+char board[SIZE][SIZE] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
+char currentPlayer = 'O';
+
+
+void displayBoard();
+bool makeMove(int position);
+bool checkWin();
+bool isDraw();
+
+int main() {
+    int position;
+    bool gameRunning = true;
+
+    printf("Welcome to Tic-Tac-Toe!\n");
+    printf("Player 1: O (Computer starts the game)\n");
+    printf("Player 2: X\n");
+
+    while (gameRunning) {
+        displayBoard();
+        printf("\nPlayer %c, enter your move (1-9): ", currentPlayer);
+        scanf("%d", &position);
+
+        if (makeMove(position)) {
+            if (checkWin()) {
+                displayBoard();
+                printf("\nPlayer %c wins!\n", currentPlayer);
+                gameRunning = false;
+            } else if (isDraw()) {
+                displayBoard();
+                printf("\nThe game is a draw!\n");
+                gameRunning = false;
+            } else {
+                
+                currentPlayer = (currentPlayer == 'O') ? 'X' : 'O';
+            }
+        } else {
+            printf("\nInvalid move. Try again.\n");
+        }
+    }
+
+    return 0;
+}
+
+
+void displayBoard() {
+    printf("\n");
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            printf(" %c ", board[i][j]);
+            if (j < SIZE - 1) printf("|");
+        }
+        if (i < SIZE - 1) printf("\n---+---+---\n");
+    }
+    printf("\n");
+}
+
+
+bool makeMove(int position) {
+    int row = (position - 1) / SIZE;
+    int col = (position - 1) % SIZE;
+
+    if (position < 1 || position > 9 || board[row][col] == 'O' || board[row][col] == 'X') {
+        return false;
+    }
+
+    board[row][col] = currentPlayer;
+    return true;
+}
+
+
+bool checkWin() {
+    
+    for (int i = 0; i < SIZE; i++) {
+        if ((board[i][0] == board[i][1] && board[i][1] == board[i][2]) || 
+            (board[0][i] == board[1][i] && board[1][i] == board[2][i])) {
+            return true;
+        }
+    }
+
+    
+    if ((board[0][0] == board[1][1] && board[1][1] == board[2][2]) ||
+        (board[0][2] == board[1][1] && board[1][1] == board[2][0])) {
+        return true;
+    }
+
+    return false;
+}
+
+
+bool isDraw() {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            if (board[i][j] != 'O' && board[i][j] != 'X') {
+                return false;
+            }
+        }
+    }
+    return true;
+}

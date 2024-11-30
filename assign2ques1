@@ -1,0 +1,3 @@
+marks = [50, 65, 78, 90]
+updated_marks = [mark + 5 for mark in marks]
+print("Updated Marks:", updated_marks)

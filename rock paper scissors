@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void printChoice(int choice) {
+    if (choice == 0)
+        printf("Rock");
+    else if (choice == 1)
+        printf("Paper");
+    else
+        printf("Scissors");
+}
+
+int main() {
+    int userChoice, computerChoice;
+    char playAgain;
+
+   
+    srand(time(0));
+
+    do {
+        printf("\n--- Rock Paper Scissors Game ---\n");
+        printf("Enter your choice:\n");
+        printf("0. Rock\n");
+        printf("1. Paper\n");
+        printf("2. Scissors\n");
+        printf("Your choice: ");
+        scanf("%d", &userChoice);
+
+        if (userChoice < 0 || userChoice > 2) {
+            printf("Invalid choice! Please choose 0, 1, or 2.\n");
+            continue;
+        }
+
+        
+        computerChoice = rand() % 3; // Random value: 0 (Rock), 1 (Paper), or 2 (Scissors)
+
+        
+        printf("You chose: ");
+        printChoice(userChoice);
+        printf("\nComputer chose: ");
+        printChoice(computerChoice);
+        printf("\n");
+
+        
+        if (userChoice == computerChoice) {
+            printf("It's a draw!\n");
+        } else if ((userChoice == 0 && computerChoice == 2) || // Rock beats Scissors
+                   (userChoice == 1 && computerChoice == 0) || // Paper beats Rock
+                   (userChoice == 2 && computerChoice == 1)) { // Scissors beats Paper
+            printf("You win!\n");
+        } else {
+            printf("Computer wins!\n");
+        }
+
+      
+        printf("Do you want to play again? (y/n): ");
+        scanf(" %c", &playAgain);
+
+    } while (playAgain == 'y' || playAgain == 'Y');
+
+    printf("Thank you for playing! Goodbye!\n");
+    return 0;
+}

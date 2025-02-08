@@ -1,0 +1,73 @@
+#include <iostream>
+#include <cctype>
+#include <unordered_map>
+using namespace std;
+
+string preprocessString(const string &str) {
+    string processed = "";
+    for (char ch : str) {
+        if (!isspace(ch)) {
+            processed += tolower(ch);
+        }
+    }
+    return processed;
+}
+
+
+bool isPalindrome(const string &str) {
+
+    string processed = preprocessString(str);
+    int left = 0, right = processed.size() - 1;
+    while (left < right) {
+        if (processed[left] != processed[right]) return false;
+        left++;
+        right--;
+    }
+    return true;
+}
+
+
+void countCharacterFrequency(const string &str) {
+    unordered_map<char, int> freq;
+    for (char ch : str) {
+        if (!isspace(ch)) { 
+            freq[tolower(ch)]++; 
+        }
+    }
+    cout << "Character Frequencies:" << endl;
+    for (auto pair : freq) {
+        cout << pair.first << ": " << pair.second << endl;
+    }
+}
+
+
+void replaceVowels(string &str) {
+    string vowels = "aeiouAEIOU";
+    for (char &ch : str) {
+        if (vowels.find(ch) != string::npos) {
+            ch = '*';
+        }
+    }
+    cout << "String after replacing vowels: " << str << endl;
+}
+
+int main() {
+    string input;
+    cout << "Enter a string: ";
+    getline(cin, input);
+
+   
+    if (isPalindrome(input)) {
+        cout << "The string is a palindrome." << endl;
+    } else {
+        cout << "The string is not a palindrome." << endl;
+    }
+
+    
+    countCharacterFrequency(input);
+
+    
+    replaceVowels(input);
+
+    return 0;
+}

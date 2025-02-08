@@ -1,0 +1,68 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+// Function to reverse and display the array
+void reverseArray(vector<int>& arr) {
+    reverse(arr.begin(), arr.end());
+    cout << "Reversed array: ";
+    for (int num : arr) {
+        cout << num << " ";
+    }
+    cout << endl;
+}
+
+// Function to find second largest and second smallest elements
+void findSecondLargestAndSmallest(vector<int>& arr) {
+    if (arr.size() < 2) {
+        cout << "Not enough elements to determine second largest and second smallest." << endl;
+        return;
+    }
+
+    // Sorting the array
+    sort(arr.begin(), arr.end());
+
+    // Finding second smallest (handling duplicates)
+    int secondSmallest = arr[0], secondLargest = arr[arr.size() - 1];
+    for (int i = 1; i < arr.size(); i++) {
+        if (arr[i] > arr[0]) {
+            secondSmallest = arr[i];
+            break;
+        }
+    }
+
+    // Finding second largest (handling duplicates)
+    for (int i = arr.size() - 2; i >= 0; i--) {
+        if (arr[i] < arr[arr.size() - 1]) {
+            secondLargest = arr[i];
+            break;
+        }
+    }
+
+    cout << "Second smallest element: " << secondSmallest << endl;
+    cout << "Second largest element: " << secondLargest << endl;
+}
+
+int main() {
+    int n;
+    cout << "Enter the size of the array: ";
+    cin >> n;
+
+    if (n < 2) {
+        cout << "Array size must be at least 2 to find second largest and smallest elements." << endl;
+        return 0;
+    }
+
+    vector<int> arr(n);
+    cout << "Enter " << n << " elements: ";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    reverseArray(arr);
+    findSecondLargestAndSmallest(arr);
+
+    return 0;
+}

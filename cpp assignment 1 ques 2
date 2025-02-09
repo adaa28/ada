@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// Function to reverse and display the array
+
 void reverseArray(vector<int>& arr) {
     reverse(arr.begin(), arr.end());
     cout << "Reversed array: ";
@@ -14,17 +14,15 @@ void reverseArray(vector<int>& arr) {
     cout << endl;
 }
 
-// Function to find second largest and second smallest elements
 void findSecondLargestAndSmallest(vector<int>& arr) {
     if (arr.size() < 2) {
         cout << "Not enough elements to determine second largest and second smallest." << endl;
         return;
     }
 
-    // Sorting the array
+   
     sort(arr.begin(), arr.end());
 
-    // Finding second smallest (handling duplicates)
     int secondSmallest = arr[0], secondLargest = arr[arr.size() - 1];
     for (int i = 1; i < arr.size(); i++) {
         if (arr[i] > arr[0]) {
@@ -33,7 +31,7 @@ void findSecondLargestAndSmallest(vector<int>& arr) {
         }
     }
 
-    // Finding second largest (handling duplicates)
+
     for (int i = arr.size() - 2; i >= 0; i--) {
         if (arr[i] < arr[arr.size() - 1]) {
             secondLargest = arr[i];
